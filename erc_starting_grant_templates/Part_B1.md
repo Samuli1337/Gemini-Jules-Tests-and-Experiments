@@ -86,15 +86,18 @@ The overall objective of SYNTH-IS is to create the foundational theory, algorith
 
 #### Objective 1: Formulate a Neuro-Symbolic Domain-Specific Language (DSL) for Enterprise Intent ($\mathcal{L}_{\text{EIS}}$)
 *Goal:* Develop a formal intermediate representation language ($\mathcal{L}_{\text{EIS}}$) that captures multi-modal human intent (natural language requirements, organizational diagrams, business process workflows) and compiles them into unambiguous probabilistic semantic graphs equipped with formal logical constraints.
+- *Key Innovation:* Rigorous grammar-constrained decoding that maps unconstrained prompt spaces into typed ASTs with 100% syntactic guarantees.
 
 #### Objective 2: Invent Multi-Layer Counterexample-Guided Inductive Synthesis (CEGIS) for Transactional Systems
 *Goal:* Formulate a novel multi-layer CEGIS algorithm capable of simultaneously synthesizing:
-- Relational and document database schemas with guaranteed normalization and foreign key integrity.
+- Relational and document database schemas with guaranteed normalization (3NF/BCNF) and foreign key integrity.
 - Atomic, Consistent, Isolated, and Durable (ACID) transactional state transitions.
 - REST/gRPC API controllers bounded by invariant security properties.
+- *Key Target:* Synthesis latency $< 30$ seconds for full sub-system specifications containing up to $10^2$ entities and $10^3$ transactional constraints.
 
 #### Objective 3: Establish Continuous Runtime Verification and Self-Healing System Architecture
-*Goal:* Design a lightweight runtime verification monitor that projects symbolic SMT assertions directly into execution runtime state. When unforeseen operational anomalies or state drift occur, the system continuously generates counterexamples and synthesizes micro-patches in real time without downtime.
+*Goal:* Design a lightweight runtime verification monitor that projects symbolic SMT assertions directly into execution runtime state via Extended Berkeley Packet Filter (eBPF) probes and database constraint triggers. When unforeseen operational anomalies or state drift occur, the system continuously generates counterexamples and synthesizes micro-patches in real time without system downtime.
+- *Key Target:* Runtime latency overhead $< 2\%$, memory overhead $< 5\%$, and 0 undetected state invariant breaches.
 
 #### Objective 4: Demonstrate End-to-End Automated Synthesis on Benchmark Enterprise Systems
 *Goal:* Construct the open-source **SYNTH-IS Workbench** and evaluate it on real-world industrial benchmarks (healthcare EHR, fintech banking ledgers, supply-chain ERP), demonstrating a 100x speedup in development velocity alongside zero formal safety violations.
@@ -149,7 +152,7 @@ Traditional formal verification occurs statically before deployment. SYNTH-IS ex
 #### Mitigation Strategies & Feasibility Proofs:
 1. **Decomposition via Domain Boundaries:** SYNTH-IS mitigates state explosion by leveraging domain-driven design principles to decompose large systems into bounded contexts, executing isolated sub-synthesis loops in parallel.
 2. **Grammar-Constrained Decoding:** Intent translation utilizes formal context-free grammar decoding (e.g., constrained sampling via JSON Schema / Lark parser), ensuring 100% syntactically valid $\mathcal{L}_{\text{EIS}}$ generation.
-3. **Hardware-Accelerated eBPF Verification:** Invariants are compiled into kernel-level eBPF probes and optimized SQL constraint triggers, keeping runtime overhead below 3%.
+3. **Hardware-Accelerated eBPF Verification:** Invariants are compiled into kernel-level eBPF probes and optimized SQL constraint triggers, keeping runtime overhead below 2%.
 
 ---
 
@@ -158,11 +161,11 @@ Traditional formal verification occurs statically before deployment. SYNTH-IS ex
 * **Year 1: Foundations of Neuro-Symbolic DSL ($\mathcal{L}_{\text{EIS}}$)**
   - Define formal semantics of $\mathcal{L}_{\text{EIS}}$. Build the Neural Intent Translation Engine (NITE).
 * **Year 2: Multi-Layer CEGIS Engine for Schemas & Transactions**
-  - Implement SMT-guided schema and transaction synthesis module (DFSE). Benchmark against standard relational synthesis tasks.
+  - Implement SMT-guided schema and transaction synthesis module (DFSE). Benchmark against standard relational synthesis tasks. Achieve synthesis time $< 30$s.
 * **Year 3: End-to-End Pipeline & API Controller Synthesis**
   - Integrate REST/gRPC service generation. Connect intent compiler with symbolic verification loop.
 * **Year 4: Continuous Runtime Verification & Self-Healing (CRVE)**
-  - Implement eBPF kernel monitoring and live micro-patching synthesis engine.
+  - Implement eBPF kernel monitoring and live micro-patching synthesis engine with $< 2\%$ latency overhead.
 * **Year 5: Industrial Benchmarking, Open-Source Release, & Validation**
   - Evaluate SYNTH-IS on healthcare, financial, and supply-chain enterprise benchmarks. Release the open-source SYNTH-IS framework.
 
